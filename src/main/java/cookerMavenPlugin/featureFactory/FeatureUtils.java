@@ -109,6 +109,10 @@ public class FeatureUtils {
 
         return String.valueOf(featureHeaderWOTagsResult);
     }
+
+    public String getFeatureName(){
+        return this.feature.getName();
+    }
 }
 
 /*

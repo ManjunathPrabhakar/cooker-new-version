@@ -134,7 +134,7 @@ public class ExampleUtils {
         }
 
 
-        return String.valueOf(this.examplesResult);
+        return (System.getProperty("line.separator") + String.valueOf(this.examplesResult));
     }
 
     public List<String> getExamplesTagsList() {

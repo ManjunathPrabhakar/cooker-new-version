@@ -1,5 +1,7 @@
 package cookerMavenPlugin.compiler;
 
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.Multimap;
 import cookerMavenPlugin.featureFactory.*;
 import io.cucumber.messages.Messages.GherkinDocument.Feature.Background;
 import io.cucumber.messages.Messages.GherkinDocument.Feature.FeatureChild.Rule;
@@ -19,7 +21,8 @@ import java.util.List;
  */
 public class RuleCompiler {
 
-    private List<String> toCreateFiles = new ArrayList<>();
+   // private List<String> toCreateFiles = new ArrayList<>();
+    private Multimap<String, String> multimapToCreateFiles = ArrayListMultimap.create();
 
     private String ruleHeaderData = null;
 
@@ -31,6 +34,7 @@ public class RuleCompiler {
     private ScenarioUtils scenarioUtils = null;
 
     // ------- INITILIZED IN CONSTRUCTOR
+    private String featureName = null;
     private List<String> featureUserTags = null;
     private String featureTags = null;
     private String featureHeader = null;
@@ -38,11 +42,12 @@ public class RuleCompiler {
     private Rule ruleFromFeature = null;
 
     public RuleCompiler(List<String> userTags,
-                        String globalFeatureTags,
+                        String featureName, String globalFeatureTags,
                         String globalFeatureHeaderData,
                         String featureBackground,
                         Rule featureRule) {
         this.featureUserTags = userTags;
+        this.featureName = featureName;
         this.featureTags = globalFeatureTags;
         this.featureHeader = globalFeatureHeaderData;
         this.featurebackground = featureBackground;
@@ -56,7 +61,7 @@ public class RuleCompiler {
      *
      * @return List of Files to Be Created
      */
-    public List<String> compileRule() {
+    public Multimap<String, String> compileRule() {
         //Get the Children under the Rule
         List<RuleChild>
                 ruleFromFeatureChildrenList = ruleFromFeature.getChildrenList();
@@ -81,7 +86,7 @@ public class RuleCompiler {
         }
 
         //Return the List of Files to be Created
-        return toCreateFiles;
+        return multimapToCreateFiles;
     }
 
     /**
@@ -155,7 +160,7 @@ public class RuleCompiler {
                 }
             }
             //Append the scenario data to file to CREATE FILE
-            toCreateFiles.add(ruleScenarioToFile.toString());
+            multimapToCreateFiles.put(featureName,ruleScenarioToFile.toString());
         }
         //If the Scenario Level tags doesnt have the Tags Specified by User, Then
         //Check if Scenario has Examples to Determine if its a Sceanrio Outline/Scenario Template
@@ -276,7 +281,7 @@ public class RuleCompiler {
                 }
             }
             //Add the sceanrioOutline to create a file
-            toCreateFiles.add(scenarioWithExampleToFile.toString());
+            multimapToCreateFiles.put(featureName,scenarioWithExampleToFile.toString());
         }
     }
 

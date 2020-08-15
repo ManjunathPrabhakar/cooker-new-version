@@ -1,9 +1,12 @@
 package cookerMavenPlugin;
 
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.Multimap;
 import cookerMavenPlugin.compiler.Compiler;
 import cookerMavenPlugin.fileFactory.FileUtils;
 import cookerMavenPlugin.fileGenFactory.GenMain;
 import cookerMavenPlugin.kitchen.Ingredients;
+import cookerplugin.MojoLogger;
 import io.cucumber.gherkin.GherkinDocumentBuilder;
 import io.cucumber.gherkin.Parser;
 import io.cucumber.gherkin.TokenMatcher;
@@ -12,8 +15,8 @@ import io.cucumber.messages.Messages.GherkinDocument;
 import io.cucumber.messages.Messages.GherkinDocument.Builder;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.logging.Logger;
 
 /**
  * This Class is the Trigger Point to parse feature files and filter as per user tags
@@ -34,15 +37,13 @@ public class CookerTrigger {
     static Parser<Builder> parser = new Parser<>(new GherkinDocumentBuilder(idGenerator));
     static TokenMatcher matcher = new TokenMatcher();
     static GherkinDocument gherkinDocument = null;
-    static List<String> filesToGenerate = new ArrayList<>();
+
+    //static List<String> filesToGenerate = new ArrayList<>();
+    static Multimap<String, String> multimapFilesToGenerate = ArrayListMultimap.create();
 
     static List<String> tagsToCreate = new ArrayList<>();
 
     public static void cookFiles() throws Exception {
-
-        System.out.println("kjdsvnjksnvkjsvkjsbvkjskjvbskjvb");
-
-        System.out.println("Tag " + Ingredients.getUserTag());
 
         tagsToCreate.add(Ingredients.getUserTag());
 
@@ -60,23 +61,25 @@ public class CookerTrigger {
                 //Get the Content of the Feature File to String
                 String featureFileContent = FileUtils.readAndGetFileContent(featureFile.getPath());
 
+
+
                 //Check if Feature File is Empty
                 if (featureFileContent.equals("")) {
                     //Display the feature file is empty and go to next Feature File
                     System.err.println(featureFile.getName() + " is Empty!");
                     continue;
                 }
-
+                System.out.println("Parsing : " + featureFile.getName());
                 //Parse the feature file content and build it to get an Object of GherkinDocument
                 gherkinDocument = parser.parse(featureFileContent/*,matcher*/).build();
 
                 //Declare & Initilize Compiler Object with an Object of IDGenerator & Tags that user needs
                 Compiler compiler = new Compiler(idGenerator, tagsToCreate);
                 //get the List of files to create by calling Compile Method with GherkinDocument Object
-                List<String> filesFromCurrentFile = compiler.compile(gherkinDocument);
+                Multimap<String, String> filesFromCurrentFile = compiler.compile(gherkinDocument);
 
                 //Append the files to create another global list
-                filesToGenerate.addAll(filesFromCurrentFile);
+                multimapFilesToGenerate.putAll(filesFromCurrentFile);
 
             }
         }
@@ -85,18 +88,28 @@ public class CookerTrigger {
             System.out.println("No Feature Files in the directory");
         }
 
-        //Loop through each file that we need to generate *.Feature file and Generate Feature & Runner File
-        for (int i = 0; i < filesToGenerate.size(); i++) {
-
-            System.out.println( filesToGenerate.get(i));
-
-            GenMain.genFiles("featureUtils.getsFeatureName()", filesToGenerate.get(i));
+        GenMain.deleteAndCreateDir();
+        Set<String> keys = multimapFilesToGenerate.keySet();
+        for (String keyprint : keys) {
+            //System.out.println("Key = " + keyprint);
+            Collection<String> values = multimapFilesToGenerate.get(keyprint);
+            for (String value : values) {
+                //System.out.println("Key = " + keyprint + " Value= "+ value);
+                GenMain.genFiles(keyprint, value);
+            }
         }
 
 
     }
 
     public static void main(String[] args) throws Exception {
-       // cookFiles();
+        Ingredients.setUserTag("@E2E");
+        Ingredients.setTrFullTempPath("G:\\IntelliJWorkspace\\cooker-new-version\\src\\main\\resources\\templates\\TestRunnerTemplate.template");
+        Ingredients.setfExiFullPath("G:\\IntelliJWorkspace\\cooker-new-version\\src\\test\\features");
+        Ingredients.setStepDefPackage("stepDefs");
+        Ingredients.setFgFullGenPath("G:\\IntelliJWorkspace\\cooker-new-version\\src\\test\\resources\\generated\\featureFiles\\");
+        Ingredients.setTrFullGenPath("G:\\IntelliJWorkspace\\cooker-new-version\\src\\test\\java\\generated\\testRunners\\");
+        Ingredients.setCustomPlaceHolders(new HashMap<String, String>());
+        cookFiles();
     }
 }

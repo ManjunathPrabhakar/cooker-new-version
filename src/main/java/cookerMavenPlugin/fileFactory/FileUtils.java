@@ -90,6 +90,8 @@ public class FileUtils {
      */
     public static void writeAndCreateFile(String filecontent, String filePathToSave) {
         try {
+            File file = new File(filePathToSave);
+            file.getParentFile().mkdirs();
             FileWriter fw = new FileWriter(filePathToSave);
             fw.write(filecontent);
             fw.close();

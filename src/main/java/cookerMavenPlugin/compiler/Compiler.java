@@ -1,5 +1,7 @@
 package cookerMavenPlugin.compiler;
 
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.Multimap;
 import cookerMavenPlugin.featureFactory.*;
 import io.cucumber.messages.IdGenerator;
 import io.cucumber.messages.Messages;
@@ -16,7 +18,6 @@ import java.util.List;
 
 /**
  * Compiler Class
- *
  */
 
 public class Compiler {
@@ -37,7 +38,8 @@ public class Compiler {
     private final IdGenerator idGenerator;
 
     private List<String> userTags = new ArrayList<>();
-    private List<String> toCreateFiles = new ArrayList<>();
+    // private List<String> toCreateFiles = new ArrayList<>();
+    private Multimap<String, String> multimapToCreateFiles = ArrayListMultimap.create();
 
     public Compiler(IdGenerator idGenerator, List<String> userTags) {
         this.idGenerator = idGenerator;
@@ -51,13 +53,13 @@ public class Compiler {
      * @param gherkinDocument gherkinDocument
      * @return List of Files to create
      */
-    public List<String> compile(GherkinDocument gherkinDocument) {
+    public Multimap<String, String> compile(GherkinDocument gherkinDocument) {
         //Get Feature from Ghrekin Document
         Feature feature = gherkinDocument.getFeature();
 
         //If feature is null then return
         if (feature == null) {
-            return toCreateFiles;
+            return multimapToCreateFiles;
         }
 
         //Create object of featureUtils from the feature
@@ -66,8 +68,8 @@ public class Compiler {
         //If Feature Level Tags COntains the UserTags, then add the feature file data to the List of files to generate
         if (featureUtils.getFeatureTagsList().containsAll(userTags)) {
             String featureData = featureUtils.getFeatureData();
-            toCreateFiles.add(featureData);
-            return toCreateFiles;
+            multimapToCreateFiles.put(featureUtils.getFeatureName(), featureData);
+            return multimapToCreateFiles;
         }
         //Else Compile FeatureFile and parse
         else {
@@ -75,7 +77,7 @@ public class Compiler {
         }
 
         //Return the List of Files to Generate
-        return toCreateFiles;
+        return multimapToCreateFiles;
     }
 
     /**
@@ -149,12 +151,12 @@ public class Compiler {
      */
     private void compileRule(Rule featureRule) {
         //Create an Object of Rule cookerMavenPlugin.compiler.Compiler with -> UserTags, FeatureTags, FeatureHeaderData, FeatureBackgroundData, Rule Object
-        RuleCompiler ruleCompiler = new RuleCompiler(userTags, globalFeatureTags,
+        RuleCompiler ruleCompiler = new RuleCompiler(userTags, featureUtils.getFeatureName(), globalFeatureTags,
                 globalFeatureHeaderData, featureBackgroundData, featureRule);
         //Get the List of Files to be Created from he object of Rule
-        List<String> ruleDataa = (ruleCompiler.compileRule());
+        Multimap<String, String> ruleDataa = (ruleCompiler.compileRule());
 
-        toCreateFiles.addAll(ruleDataa);
+        multimapToCreateFiles.putAll(ruleDataa);
     }
 
     /**
@@ -197,10 +199,11 @@ public class Compiler {
             }
 
             //Append the scenario data to file to CREATE FILE
-            toCreateFiles.add(sceanrioToFile.toString());
+            multimapToCreateFiles.put(featureUtils.getFeatureName(),sceanrioToFile.toString());
         }
         //If the Scenario Level tags doesnt have the Tags Specified by User, Then
         //Check if Scenario has Examples to Determine if its a Sceanrio Outline/Scenario Template
+        //Coz Examples also might have Tags, If it same as userTags then Sceanrio + that matching example
         else {
             //Create a List of Examples Object to Store the Examples of the Current Scenario
             List<Examples> examplesList = featureScenario.getExamplesList();
@@ -217,7 +220,7 @@ public class Compiler {
      * <h5> Author : Manjunath Prabhakar (manjunath189@gmail.com) </h5>
      *
      * @param featureScenarioWithSelectedExample Scenario Object that has Examples
-     * @param scenarioExamples       Examples of the Scenario
+     * @param scenarioExamples                   Examples of the Scenario
      */
     private void compileScenarioWithExample(Scenario featureScenarioWithSelectedExample, Examples scenarioExamples) {
         //Create an StringBuilder object to store the ScenarioOutline Details
@@ -244,6 +247,7 @@ public class Compiler {
             List<Messages.GherkinDocument.Feature.Tag> scenarioTagsList = featureScenarioWithSelectedExample.getTagsList();
             List<Messages.GherkinDocument.Feature.Step> scenarioStepsList = featureScenarioWithSelectedExample.getStepsList();
 
+
             //Get the Scenario Level Tags
             for (Messages.GherkinDocument.Feature.Tag tag : scenarioTagsList) {
                 //Create object of TagUtils and Get Tags
@@ -268,8 +272,6 @@ public class Compiler {
                 scenarioData.append(stepData);
 
             }
-
-
             //Get the Examples Data and Append to SceanrioData Object
             String exampleData = exampleUtils.getExamplesData();
             scenarioData.append(exampleData);
@@ -292,7 +294,7 @@ public class Compiler {
             }
 
             //Add the sceanrioOutline to create a file
-            toCreateFiles.add(scenarioWithExampleToFile.toString());
+            multimapToCreateFiles.put(featureUtils.getFeatureName(),scenarioWithExampleToFile.toString());
         }
     }
 
