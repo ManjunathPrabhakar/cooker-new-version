@@ -1,8 +1,12 @@
 package cookerMavenPlugin.fileFactory;
 
+import org.yaml.snakeyaml.Yaml;
+
 import java.io.*;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * This Class Contains several methods to perform Files Operations
@@ -158,6 +162,25 @@ public class FileUtils {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * This method is used to read a yaml file
+     * <h5> Author : Manjunath Prabhakar (manjunath189@gmail.com) </h5>
+     *
+     * @param file yamlfilepath
+     * @return yaml data in MAP
+     */
+    public static Map<String, Object> readYmlFile(File file) {
+        Map<String, Object> configurations = new LinkedHashMap<>();
+        try {
+            InputStream configStream = new FileInputStream(file);
+            Yaml yaml = new Yaml();
+            configurations = yaml.load(configStream);
+        } catch (Exception e) {
+            System.out.println("Exception is :" + e.getLocalizedMessage());
+        }
+        return configurations;
     }
 
 }

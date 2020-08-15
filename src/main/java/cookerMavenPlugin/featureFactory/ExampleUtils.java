@@ -2,9 +2,9 @@ package cookerMavenPlugin.featureFactory;
 
 import cookerMavenPlugin.fileFactory.ExcelReader;
 import io.cucumber.messages.Messages.GherkinDocument.Feature.Scenario.Examples;
-import io.cucumber.messages.Messages.GherkinDocument.Feature.Tag;
-import io.cucumber.messages.Messages.GherkinDocument.Feature.TableRow.TableCell;
 import io.cucumber.messages.Messages.GherkinDocument.Feature.TableRow;
+import io.cucumber.messages.Messages.GherkinDocument.Feature.TableRow.TableCell;
+import io.cucumber.messages.Messages.GherkinDocument.Feature.Tag;
 
 import java.util.ArrayList;
 import java.util.List;

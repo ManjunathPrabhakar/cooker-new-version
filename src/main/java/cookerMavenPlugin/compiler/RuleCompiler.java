@@ -11,7 +11,6 @@ import io.cucumber.messages.Messages.GherkinDocument.Feature.Scenario.Examples;
 import io.cucumber.messages.Messages.GherkinDocument.Feature.Step;
 import io.cucumber.messages.Messages.GherkinDocument.Feature.Tag;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,7 +20,7 @@ import java.util.List;
  */
 public class RuleCompiler {
 
-   // private List<String> toCreateFiles = new ArrayList<>();
+    // private List<String> toCreateFiles = new ArrayList<>();
     private Multimap<String, String> multimapToCreateFiles = ArrayListMultimap.create();
 
     private String ruleHeaderData = null;
@@ -160,7 +159,7 @@ public class RuleCompiler {
                 }
             }
             //Append the scenario data to file to CREATE FILE
-            multimapToCreateFiles.put(featureName,ruleScenarioToFile.toString());
+            multimapToCreateFiles.put(featureName, ruleScenarioToFile.toString());
         }
         //If the Scenario Level tags doesnt have the Tags Specified by User, Then
         //Check if Scenario has Examples to Determine if its a Sceanrio Outline/Scenario Template
@@ -281,7 +280,7 @@ public class RuleCompiler {
                 }
             }
             //Add the sceanrioOutline to create a file
-            multimapToCreateFiles.put(featureName,scenarioWithExampleToFile.toString());
+            multimapToCreateFiles.put(featureName, scenarioWithExampleToFile.toString());
         }
     }
 

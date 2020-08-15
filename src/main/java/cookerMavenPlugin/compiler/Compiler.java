@@ -199,7 +199,7 @@ public class Compiler {
             }
 
             //Append the scenario data to file to CREATE FILE
-            multimapToCreateFiles.put(featureUtils.getFeatureName(),sceanrioToFile.toString());
+            multimapToCreateFiles.put(featureUtils.getFeatureName(), sceanrioToFile.toString());
         }
         //If the Scenario Level tags doesnt have the Tags Specified by User, Then
         //Check if Scenario has Examples to Determine if its a Sceanrio Outline/Scenario Template
@@ -294,7 +294,7 @@ public class Compiler {
             }
 
             //Add the sceanrioOutline to create a file
-            multimapToCreateFiles.put(featureUtils.getFeatureName(),scenarioWithExampleToFile.toString());
+            multimapToCreateFiles.put(featureUtils.getFeatureName(), scenarioWithExampleToFile.toString());
         }
     }
 

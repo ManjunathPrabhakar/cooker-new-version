@@ -3,7 +3,7 @@ package cookerMavenPlugin.fileGenFactory;
 public class RandomNumberGenerator {
 
     /**
-     * This method is used to get the random number between AA to ZZ & 00001 to 99999 (XX88888)
+     * This method is used to get the random number between AA to ZZ &amp; 00001 to 99999 (XX88888)
      * <h5> Author : Manjunath Prabhakar (manjunath189@gmail.com) </h5>
      *
      * @return : formatted random number
@@ -31,7 +31,7 @@ public class RandomNumberGenerator {
     }
 
     /**
-     * Method returns Random Number between Minimum Number & Maximum Number
+     * Method returns Random Number between Minimum Number &amp; Maximum Number
      *
      * @param minNum minimum Number
      * @param maxNum maximum Number

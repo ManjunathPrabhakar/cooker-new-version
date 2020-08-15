@@ -6,7 +6,6 @@ import cookerMavenPlugin.compiler.Compiler;
 import cookerMavenPlugin.fileFactory.FileUtils;
 import cookerMavenPlugin.fileGenFactory.GenMain;
 import cookerMavenPlugin.kitchen.Ingredients;
-import cookerplugin.MojoLogger;
 import io.cucumber.gherkin.GherkinDocumentBuilder;
 import io.cucumber.gherkin.Parser;
 import io.cucumber.gherkin.TokenMatcher;
@@ -16,18 +15,17 @@ import io.cucumber.messages.Messages.GherkinDocument.Builder;
 
 import java.io.File;
 import java.util.*;
-import java.util.logging.Logger;
 
 /**
  * This Class is the Trigger Point to parse feature files and filter as per user tags
- * and create *.feature (Feature File)  & *.java (Test Runner File)
+ * and create *.feature (Feature File) &amp; *.java (Test Runner File)
  * <p>
  * Usage: The Mojo Class get the parameters from the POM File and does below
  * 1. sets parameter data to Kitchen.Ingredients POJO Class.
  * 2. And Calls the Method in cookerMavenPlugin.CookerTrigger.
  * 2a. cookerMavenPlugin.CookerTrigger Methods gets the data from Kitchen.Ingredients POJO Class.
  * 2b. And Parses each *.feature file with user needed tags and appends to a List.
- * 2c. At the end Feature & Runner File are created by reading each entry in the List.
+ * 2c. At the end Feature &amp; Runner File are created by reading each entry in the List.
  *
  * <h5> Author : Manjunath Prabhakar (manjunath189@gmail.com) </h5>
  */
@@ -60,7 +58,6 @@ public class CookerTrigger {
 
                 //Get the Content of the Feature File to String
                 String featureFileContent = FileUtils.readAndGetFileContent(featureFile.getPath());
-
 
 
                 //Check if Feature File is Empty
@@ -102,14 +99,38 @@ public class CookerTrigger {
 
     }
 
-    public static void main(String[] args) throws Exception {
-        Ingredients.setUserTag("@E2E");
-        Ingredients.setTrFullTempPath("G:\\IntelliJWorkspace\\cooker-new-version\\src\\main\\resources\\templates\\TestRunnerTemplate.template");
-        Ingredients.setfExiFullPath("G:\\IntelliJWorkspace\\cooker-new-version\\src\\test\\features");
-        Ingredients.setStepDefPackage("stepDefs");
-        Ingredients.setFgFullGenPath("G:\\IntelliJWorkspace\\cooker-new-version\\src\\test\\resources\\generated\\featureFiles\\");
-        Ingredients.setTrFullGenPath("G:\\IntelliJWorkspace\\cooker-new-version\\src\\test\\java\\generated\\testRunners\\");
-        Ingredients.setCustomPlaceHolders(new HashMap<String, String>());
-        cookFiles();
+    public static void cookWithoutMaven(String propPath) throws Exception {
+
+        Map<String, Object> res = FileUtils.readYmlFile(new File(propPath));
+        String projectPath = System.getProperty("user.dir");
+
+        try {
+            String userTag = (String) res.get("userTag");
+            Ingredients.setUserTag(userTag);
+
+            String tempPath = projectPath + (String) res.get("templatePath");
+            Ingredients.setTrFullTempPath(tempPath);
+
+            String featuresPath = projectPath + (String) res.get("featuresPath");
+            Ingredients.setfExiFullPath(featuresPath);
+
+            String stepDefPack = (String) res.get("stepDefsPackage");
+            Ingredients.setStepDefPackage(stepDefPack);
+
+            String genFeaturePath = projectPath + (String) res.get("generatedFeaturesPath");
+            Ingredients.setFgFullGenPath(genFeaturePath);
+
+            String genRunnPath = projectPath + (String) res.get("generatedRunnerPath");
+            Ingredients.setTrFullGenPath(genRunnPath);
+
+            Map<String, String> cusPlaceHolders = (Map<String, String>) res.get("customPlaceHolders");
+            Ingredients.setCustomPlaceHolders(cusPlaceHolders);
+
+            cookFiles();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
     }
 }
