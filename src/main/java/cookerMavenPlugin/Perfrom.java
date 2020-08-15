@@ -11,7 +11,7 @@ import java.util.Map;
  * @created 15/08/2020
  * @project custom-annotations
  */
-public class perfrom {
+public class Perfrom {
 
     static boolean perfomedHuh = false;
 
@@ -30,10 +30,10 @@ public class perfrom {
 
     }
 
-    public static void main(String[] args) {
-        Map<String, Object> stringObjectMap = FileUtils.readYmlFile(new File("data.yml"));
-
-        String s = System.getProperty("user.dir") + (String) stringObjectMap.get("templatePath");
-        System.out.println(s);
-    }
+//    public static void main(String[] args) {
+//        Map<String, Object> stringObjectMap = FileUtils.readYmlFile(new File("data.yml"));
+//
+//        String s = System.getProperty("user.dir") + (String) stringObjectMap.get("templatePath");
+//        System.out.println(s);
+//    }
 }
