@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2020.  Manjunath Prabhakar manjunath189@gmail.com
+ */
+
 package cookerMavenPlugin.compiler;
 
 import com.google.common.collect.ArrayListMultimap;
@@ -14,14 +18,14 @@ import io.cucumber.messages.Messages.GherkinDocument.Feature.Tag;
 import java.util.List;
 
 /**
- * @author Manjunath-PC
+ * @author Manjunath Prabhakar
  * @created 26/04/2020
  * @project cooker-new-version
  */
 public class RuleCompiler {
 
     // private List<String> toCreateFiles = new ArrayList<>();
-    private Multimap<String, String> multimapToCreateFiles = ArrayListMultimap.create();
+    private final Multimap<String, String> multimapToCreateFiles = ArrayListMultimap.create();
 
     private String ruleHeaderData = null;
 
@@ -40,7 +44,7 @@ public class RuleCompiler {
     private String featurebackground = null;
     private Rule ruleFromFeature = null;
 
-    private CookerTagExpressionParser cookerTagExpressionParser;
+    private final CookerTagExpressionParser cookerTagExpressionParser;
 
     public RuleCompiler(String userTags,
                         String featureName, String globalFeatureTags,
@@ -59,7 +63,7 @@ public class RuleCompiler {
 
     /**
      * This Main Method Compile's the Rule in the Feature
-     * <h5> Author : Manjunath Prabhakar (manjunath189@gmail.com) </h5>
+     * <h5> Author : Manjunath Prabhakar </h5>
      *
      * @return List of Files to Be Created
      */
@@ -93,7 +97,7 @@ public class RuleCompiler {
 
     /**
      * This Method Compile the Background found under the Rule
-     * <h5> Author : Manjunath Prabhakar (manjunath189@gmail.com) </h5>
+     * <h5> Author : Manjunath Prabhakar </h5>
      *
      * @param ruleBackground an Object of Background under the Rule
      */
@@ -108,7 +112,7 @@ public class RuleCompiler {
      * If the Scenario/Sceanrio Outline Level Tags has the same Tags specified by user then load the whole scenario/Sceanrio Outline to create a file
      * Else Get the List of Examples of from the Sceanrio Outline,
      * for each Examples of the Sceanrio Outline call compileScenarioWithExample with Scenario Object & Examples Object
-     * <h5> Author : Manjunath Prabhakar (manjunath189@gmail.com) </h5>
+     * <h5> Author : Manjunath Prabhakar </h5>
      *
      * @param ruleScenario an Object of Scenario under the Rule
      */
@@ -120,7 +124,7 @@ public class RuleCompiler {
 
         //Check if Scenario has the Tags Specified by the User
 
-        if (cookerTagExpressionParser.tagParser(featureUserTags,scenarioUtils.getScenarioTagsList())) {
+        if (cookerTagExpressionParser.tagParser(featureUserTags, scenarioUtils.getScenarioTagsList())) {
 
             ruleScenarioToFile.append(featureTags == null ? "" : featureTags);
             ruleScenarioToFile.append(System.getProperty("line.separator"));
@@ -180,7 +184,7 @@ public class RuleCompiler {
 
     /**
      * This Method is used to compile the Scenario Object that has Examples a.k.a Scenario Outline
-     * <h5> Author : Manjunath Prabhakar (manjunath189@gmail.com) </h5>
+     * <h5> Author : Manjunath Prabhakar </h5>
      *
      * @param ruleScenarioWithSelectedExample Scenario Object that has Examples
      * @param scenarioExamples                Examples of the Scenario
@@ -199,7 +203,7 @@ public class RuleCompiler {
         ExampleUtils exampleUtils = new ExampleUtils(scenarioExamples);
 
         //Check if Examples Level Tags has the Tags Specified by the User
-        if (cookerTagExpressionParser.tagParser(featureUserTags,exampleUtils.getExamplesTagsList())) {
+        if (cookerTagExpressionParser.tagParser(featureUserTags, exampleUtils.getExamplesTagsList())) {
 
             //Markk the Flag to TRUE
             found = true;

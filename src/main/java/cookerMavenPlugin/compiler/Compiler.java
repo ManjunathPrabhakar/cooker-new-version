@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2020.  Manjunath Prabhakar manjunath189@gmail.com
+ */
+
 package cookerMavenPlugin.compiler;
 
 import com.google.common.collect.ArrayListMultimap;
@@ -36,11 +40,10 @@ public class Compiler {
 
     private final IdGenerator idGenerator;
 
-    private String userTags = new String();
     // private List<String> toCreateFiles = new ArrayList<>();
-    private Multimap<String, String> multimapToCreateFiles = ArrayListMultimap.create();
-
-    private CookerTagExpressionParser cookerTagExpressionParser;
+    private final Multimap<String, String> multimapToCreateFiles = ArrayListMultimap.create();
+    private final CookerTagExpressionParser cookerTagExpressionParser;
+    private String userTags = "";
 
     public Compiler(IdGenerator idGenerator, String userTags) {
         this.idGenerator = idGenerator;
@@ -50,7 +53,7 @@ public class Compiler {
 
     /**
      * Main method to compile feature file to get details as perUserTag
-     * <h5> Author : Manjunath Prabhakar (manjunath189@gmail.com) </h5>
+     * <h5> Author : Manjunath Prabhakar </h5>
      *
      * @param gherkinDocument gherkinDocument
      * @return List of Files to create
@@ -69,7 +72,7 @@ public class Compiler {
 
         //If Feature Level Tags COntains the UserTags, then add the feature file data to the List of files to generate
 
-        if (cookerTagExpressionParser.tagParser(userTags,featureUtils.getFeatureTagsList())) {
+        if (cookerTagExpressionParser.tagParser(userTags, featureUtils.getFeatureTagsList())) {
             String featureData = featureUtils.getFeatureData();
             multimapToCreateFiles.put(featureUtils.getFeatureName(), featureData);
             return multimapToCreateFiles;
@@ -85,7 +88,7 @@ public class Compiler {
 
     /**
      * This Method is used to compile the feature file
-     * <h5> Author : Manjunath Prabhakar (manjunath189@gmail.com) </h5>
+     * <h5> Author : Manjunath Prabhakar </h5>
      *
      * @param feature Object of Feature
      */
@@ -135,7 +138,7 @@ public class Compiler {
 
     /**
      * This Method is used to Compile the Background Object from the Feature and get the Background Data into a String
-     * <h5> Author : Manjunath Prabhakar (manjunath189@gmail.com) </h5>
+     * <h5> Author : Manjunath Prabhakar </h5>
      *
      * @param featureBackground Background Object from the Feature
      */
@@ -148,7 +151,7 @@ public class Compiler {
 
     /**
      * This Method is used to Compile the Rule Object from the Feature
-     * <h5> Author : Manjunath Prabhakar (manjunath189@gmail.com) </h5>
+     * <h5> Author : Manjunath Prabhakar </h5>
      *
      * @param featureRule Rule Object from Feature
      */
@@ -167,7 +170,7 @@ public class Compiler {
      * If the Scenario/Sceanrio Outline Level Tags has the same Tags specified by user then load the whole scenario/Sceanrio Outline to create a file
      * Else Get the List of Examples of from the Sceanrio Outline,
      * for each Examples of the Sceanrio Outline call compileScenarioWithExample with Scenario Object & Examples Object
-     * <h5> Author : Manjunath Prabhakar (manjunath189@gmail.com) </h5>
+     * <h5> Author : Manjunath Prabhakar </h5>
      *
      * @param featureScenario Scenario Object from Feature
      */
@@ -178,7 +181,7 @@ public class Compiler {
         StringBuilder sceanrioToFile = new StringBuilder();
 
         //Check if Scenario Level Tags has the User Tags
-        if (cookerTagExpressionParser.tagParser(userTags,scenarioUtils.getScenarioTagsList())) {
+        if (cookerTagExpressionParser.tagParser(userTags, scenarioUtils.getScenarioTagsList())) {
 
             //Append FeatureTags & Feature Header to StringBuilder Object
             sceanrioToFile.append(globalFeatureTags == null ? "" : globalFeatureTags);
@@ -220,7 +223,7 @@ public class Compiler {
 
     /**
      * This Method is used to compile the Scenario Object that has Examples a.k.a Scenario Outline
-     * <h5> Author : Manjunath Prabhakar (manjunath189@gmail.com) </h5>
+     * <h5> Author : Manjunath Prabhakar </h5>
      *
      * @param featureScenarioWithSelectedExample Scenario Object that has Examples
      * @param scenarioExamples                   Examples of the Scenario
@@ -238,7 +241,7 @@ public class Compiler {
         ExampleUtils exampleUtils = new ExampleUtils(scenarioExamples);
 
         //Check if Examples Level Tags has the Tags Specified by the User
-        if (cookerTagExpressionParser.tagParser(userTags,exampleUtils.getExamplesTagsList())) {
+        if (cookerTagExpressionParser.tagParser(userTags, exampleUtils.getExamplesTagsList())) {
 
             //Markk the Flag to TRUE
             found = true;

@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2020.  Manjunath Prabhakar manjunath189@gmail.com
+ */
+
 package cookerMavenPlugin.featureFactory;
 
 import io.cucumber.messages.Messages.GherkinDocument.Feature.Background;
@@ -6,7 +10,7 @@ import io.cucumber.messages.Messages.GherkinDocument.Feature.Step;
 import java.util.List;
 
 /**
- * @author Manjunath-PC
+ * @author Manjunath Prabhakar
  * @created 24/04/2020
  * @project cooker-new-version
  */
@@ -18,8 +22,8 @@ public class BackgroundUtils {
     BACKGROUND CANNOT HAVE TAGS, EXAMPLES
      */
 
-    private Background background;
-    private StringBuilder backgroundResult = new StringBuilder();
+    private final Background background;
+    private final StringBuilder backgroundResult = new StringBuilder();
     private String backgroundStepData = null;
     private StepUtils stepUtils = null;
 

@@ -26,10 +26,10 @@ And Tested in TESTNG Framework. Its works with JUNIT as well.*
     <plugin>
                     <groupId>com.github.cooker-new-version</groupId>
                     <artifactId>cooker-new-version</artifactId>
-                    <version>1.4-SNAPSHOT</version>
+                    <version>1.5.1-SNAPSHOT</version>
                     <configuration>
                         <!--suppress UnresolvedMavenProperty -->
-                        <tag>@E2E</tag>
+                        <tags>@E2E</tags>
                         <stepDefPackage>stepDefs</stepDefPackage>
                         <templatePath>${project.basedir}\src\main\resources\templates\TestRunnerTemplate.template
                         </templatePath>

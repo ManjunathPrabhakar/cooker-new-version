@@ -1,9 +1,13 @@
+/*
+ * Copyright (c) 2020.  Manjunath Prabhakar manjunath189@gmail.com
+ */
+
 package cookerMavenPlugin;
 
 import cookerMavenPlugin.annotations.initCucumber;
 
 /**
- * @author Manjunath-PC
+ * @author Manjunath Prabhakar
  * @created 15/08/2020
  * @project custom-annotations
  */
@@ -14,13 +18,14 @@ public class Perfrom {
     public static void now() throws Exception {
         if (!perfomedHuh) {
             String className = new Exception().getStackTrace()[1].getClassName();
-            Class c = Class.forName(className);
-            java.lang.annotation.Annotation annotation = c.getAnnotation(initCucumber.class);
-            initCucumber i = (initCucumber) annotation;
+            Class<?> c = Class.forName(className);
+            initCucumber annotation = c.getAnnotation(initCucumber.class);
 
-            String propertiesFile = i.propertiesPath();
-            CookerTrigger.cookWithoutMaven(propertiesFile);
-
+            String propertiesFile = annotation.propertiesPath();
+            boolean enabled = annotation.enabled();
+            if (enabled) {
+                CookerTrigger.cookWithoutMaven(propertiesFile);
+            }
             perfomedHuh = true;
         }
 

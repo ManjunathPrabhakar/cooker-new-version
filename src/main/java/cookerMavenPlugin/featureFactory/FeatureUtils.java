@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2020.  Manjunath Prabhakar manjunath189@gmail.com
+ */
+
 package cookerMavenPlugin.featureFactory;
 
 
@@ -13,7 +17,7 @@ import java.util.List;
 
 
 /**
- * @author Manjunath-PC
+ * @author Manjunath Prabhakar
  * @created 24/04/2020
  * @project cooker-new-version
  */
@@ -26,7 +30,7 @@ public class FeatureUtils {
      */
 
     private Feature feature = null;
-    private StringBuilder featureResult = new StringBuilder();
+    private final StringBuilder featureResult = new StringBuilder();
 
     public FeatureUtils(Feature prFeature) {
         this.feature = prFeature;

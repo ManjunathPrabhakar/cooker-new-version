@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2020.  Manjunath Prabhakar manjunath189@gmail.com
+ */
+
 package cookerMavenPlugin.fileGenFactory;
 
 import cookerMavenPlugin.fileFactory.FileUtils;
@@ -18,15 +22,15 @@ public class GenMain {
 
     ////////////////////////////////////////////////////////////////////////////////
     //GetAll Needed Values from Ingredients Class
-    private static String GenFeatureFilesFullPath = Ingredients.getFgFullGenPath();
-    private static String StepDefPackageName = Ingredients.getStepDefPackage();
-    private static Map<String, String> CustomPlaceHolders = Ingredients.getCustomPlaceHolders();
-    private static String GenTestRunnersFullPath = Ingredients.getTrFullGenPath();
+    private static final String GenFeatureFilesFullPath = Ingredients.getFgFullGenPath();
+    private static final String StepDefPackageName = Ingredients.getStepDefPackage();
+    private static final Map<String, String> CustomPlaceHolders = Ingredients.getCustomPlaceHolders();
+    private static final String GenTestRunnersFullPath = Ingredients.getTrFullGenPath();
     ////////////////////////////////////////////////////////////////////////////////
 
     /**
      * This Method is used to generate TestRunner Files and Feature Files in Generated.TestRunners and Generated.FeatureFiles Directory
-     * <h5> Author : Manjunath Prabhakar (manjunath189@gmail.com) </h5>
+     * <h5> Author : Manjunath Prabhakar </h5>
      *
      * @param pFileName       //Feature Name Only
      * @param pFeatureContent //Feature Content
@@ -75,7 +79,7 @@ public class GenMain {
     /**
      * This Method is used to perfrom deletion and creation of Generated.TestRunners and Generated.FeatureFiles Directory
      * It uses static methods from FileUtils Class
-     * <h5> Author : Manjunath Prabhakar (manjunath189@gmail.com) </h5>
+     * <h5> Author : Manjunath Prabhakar </h5>
      */
     public static void deleteAndCreateDir() {
         //Delete Old Generated.FeatureFiles Directory

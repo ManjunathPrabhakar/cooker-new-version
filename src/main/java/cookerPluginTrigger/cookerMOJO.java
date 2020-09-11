@@ -1,7 +1,12 @@
-package cookerplugin;
+/*
+ * Copyright (c) 2020.  Manjunath Prabhakar manjunath189@gmail.com
+ */
+
+package cookerPluginTrigger;
 
 import cookerMavenPlugin.CookerTrigger;
 import cookerMavenPlugin.kitchen.Ingredients;
+import cookerMavenPlugin.loggers.MojoLogger;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
@@ -37,11 +42,11 @@ public class cookerMOJO extends AbstractMojo {
     @Parameter(property = "customPlaceHolder", defaultValue = "")
     private Map<String, String> customPlaceHolders;
 
-    private Log MOJO_LOGGER = getLog();
+    private final Log MOJO_LOGGER = getLog();
 
     /**
-     * This Method is First Executed during INITILIZE (cook) LifeCycle of Maven, Its Thread Safe
-     * <h5> Author : Manjunath Prabhakar (manjunath189@gmail.com) </h5>
+     * This Method is First Executed during INITIALIZE (cook) LifeCycle of Maven, Its Thread Safe
+     * <h5> Author : Manjunath Prabhakar </h5>
      *
      * @throws MojoExecutionException If Any
      * @throws MojoFailureException   If Any
@@ -82,18 +87,11 @@ public class cookerMOJO extends AbstractMojo {
 
     /**
      * This Method Reads the parameters from POM File and stores it in the Kitchen.Ingredients(PoJo Class)
-     * <h5> Author : Manjunath Prabhakar (manjunath189@gmail.com) </h5>
+     * <h5> Author : Manjunath Prabhakar </h5>
      */
     private void getAndMapParameters() {
         try {
             MOJO_LOGGER.info("============================== Preparing Ingredients ===========================");
-            Ingredients.setUserTag(this.tags);
-            Ingredients.setTrFullTempPath(this.templatePath);
-            Ingredients.setfExiFullPath(this.featuresPath);
-            Ingredients.setStepDefPackage(this.stepDefPackage);
-            Ingredients.setFgFullGenPath(this.featureFilesGenDir);
-            Ingredients.setTrFullGenPath(this.testRunnersGenDir);
-            Ingredients.setCustomPlaceHolders(this.customPlaceHolders);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -101,15 +99,15 @@ public class cookerMOJO extends AbstractMojo {
 
     /**
      * This Method is used to display the Parameters mentioned in the POM during the Execution
-     * <h5> Author : Manjunath Prabhakar (manjunath189@gmail.com) </h5>
+     * <h5> Author : Manjunath Prabhakar </h5>
      */
     private void showParameters() {
         try {
             MOJO_LOGGER.info("============================ Selected Ingredients ==============================");
             MOJO_LOGGER.info("== Selected Tags                     : " + Ingredients.getUserTag());
-            MOJO_LOGGER.info("== Test Runner Template              : " + Ingredients.getTrFullTempPath());
+            MOJO_LOGGER.info("== Test Runner Template Path         : " + Ingredients.getTrFullTempPath());
             MOJO_LOGGER.info("== Feature Files Directory           : " + Ingredients.getfExiFullPath());
-            MOJO_LOGGER.info("== Step Definations Package          : " + Ingredients.getStepDefPackage());
+            MOJO_LOGGER.info("== Step Definitions Package          : " + Ingredients.getStepDefPackage());
             MOJO_LOGGER.info("== Feature Files Generated Directory : " + Ingredients.getFgFullGenPath());
             MOJO_LOGGER.info("== Test Runners Generated Directory  : " + Ingredients.getTrFullGenPath());
             MOJO_LOGGER.info("== Custom Placeholders               : " + Ingredients.getCustomPlaceHolders());

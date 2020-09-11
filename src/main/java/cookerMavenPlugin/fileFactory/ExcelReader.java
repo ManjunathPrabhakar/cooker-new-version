@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2020.  Manjunath Prabhakar manjunath189@gmail.com
+ */
+
 package cookerMavenPlugin.fileFactory;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -13,7 +17,7 @@ public class ExcelReader {
 
     /**
      * Read the Excel File and Convert that into Examples Format for Scenario Outline
-     * <h5> Author : Manjunath Prabhakar (manjunath189@gmail.com) </h5>
+     * <h5> Author : Manjunath Prabhakar </h5>
      *
      * @param filePath  Folder Path Only
      * @param fileName  FileName with Extension (xlsx/xls)

@@ -1,10 +1,14 @@
+/*
+ * Copyright (c) 2020.  Manjunath Prabhakar manjunath189@gmail.com
+ */
+
 package cookerMavenPlugin.fileGenFactory;
 
 public class RandomNumberGenerator {
 
     /**
      * This method is used to get the random number between AA to ZZ &amp; 00001 to 99999 (XX88888)
-     * <h5> Author : Manjunath Prabhakar (manjunath189@gmail.com) </h5>
+     * <h5> Author : Manjunath Prabhakar </h5>
      *
      * @return : formatted random number
      */

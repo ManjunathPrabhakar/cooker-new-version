@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2020.  Manjunath Prabhakar manjunath189@gmail.com
+ */
+
 package cookerMavenPlugin.featureFactory;
 
 import io.cucumber.messages.Messages.GherkinDocument.Feature.Step;
@@ -5,13 +9,13 @@ import io.cucumber.messages.Messages.GherkinDocument.Feature.Step.DataTable;
 import io.cucumber.messages.Messages.GherkinDocument.Feature.Step.DocString;
 
 /**
- * @author Manjunath-PC
+ * @author Manjunath Prabhakar
  * @created 24/04/2020
  * @project cooker-new-version
  */
 public class StepUtils {
     private Step step = null;
-    private StringBuilder stepData = new StringBuilder();
+    private final StringBuilder stepData = new StringBuilder();
 
     public StepUtils(Step prStep) {
         this.step = prStep;

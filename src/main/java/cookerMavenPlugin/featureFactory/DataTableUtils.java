@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2020.  Manjunath Prabhakar manjunath189@gmail.com
+ */
+
 package cookerMavenPlugin.featureFactory;
 
 import io.cucumber.messages.Messages.GherkinDocument.Feature.Step.DataTable;
@@ -7,7 +11,7 @@ import io.cucumber.messages.Messages.GherkinDocument.Feature.TableRow.TableCell;
 import java.util.List;
 
 /**
- * @author Manjunath-PC
+ * @author Manjunath Prabhakar
  * @created 24/04/2020
  * @project cooker-new-version
  */
@@ -19,7 +23,7 @@ public class DataTableUtils {
 
 
     private DataTable dataTable = null;
-    private StringBuilder dataTableResult = new StringBuilder();
+    private final StringBuilder dataTableResult = new StringBuilder();
 
     public DataTableUtils(DataTable prDataTable) {
         this.dataTable = prDataTable;

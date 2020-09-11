@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2020.  Manjunath Prabhakar manjunath189@gmail.com
+ */
+
 package cookerMavenPlugin;
 
 import com.google.common.collect.ArrayListMultimap;
@@ -6,6 +10,7 @@ import cookerMavenPlugin.compiler.Compiler;
 import cookerMavenPlugin.fileFactory.FileUtils;
 import cookerMavenPlugin.fileGenFactory.GenMain;
 import cookerMavenPlugin.kitchen.Ingredients;
+import cookerMavenPlugin.loggers.MojoLogger;
 import io.cucumber.gherkin.GherkinDocumentBuilder;
 import io.cucumber.gherkin.Parser;
 import io.cucumber.gherkin.TokenMatcher;
@@ -30,7 +35,7 @@ import java.util.Set;
  * 2b. And Parses each *.feature file with user needed tags and appends to a List.
  * 2c. At the end Feature &amp; Runner File are created by reading each entry in the List.
  *
- * <h5> Author : Manjunath Prabhakar (manjunath189@gmail.com) </h5>
+ * <h5> Author : Manjunath Prabhakar </h5>
  */
 public class CookerTrigger {
 
@@ -42,7 +47,7 @@ public class CookerTrigger {
     //static List<String> filesToGenerate = new ArrayList<>();
     static Multimap<String, String> multimapFilesToGenerate = ArrayListMultimap.create();
 
-    static String tagsToCreate = new String();
+    static String tagsToCreate = "";
 
     public static void cookFiles() throws Exception {
 
@@ -99,6 +104,8 @@ public class CookerTrigger {
             }
         }
 
+        MojoLogger.getLogger().info("Generated " + multimapFilesToGenerate.size() + " Feature & Runner File(s) Respectively");
+
 
     }
 
@@ -111,19 +118,19 @@ public class CookerTrigger {
             String userTag = (String) res.get("userTag");
             Ingredients.setUserTag(userTag);
 
-            String tempPath = projectPath + (String) res.get("templatePath");
+            String tempPath = projectPath + res.get("templatePath");
             Ingredients.setTrFullTempPath(tempPath);
 
-            String featuresPath = projectPath + (String) res.get("featuresPath");
+            String featuresPath = projectPath + res.get("featuresPath");
             Ingredients.setfExiFullPath(featuresPath);
 
             String stepDefPack = (String) res.get("stepDefsPackage");
             Ingredients.setStepDefPackage(stepDefPack);
 
-            String genFeaturePath = projectPath + (String) res.get("generatedFeaturesPath");
+            String genFeaturePath = projectPath + res.get("generatedFeaturesPath");
             Ingredients.setFgFullGenPath(genFeaturePath);
 
-            String genRunnPath = projectPath + (String) res.get("generatedRunnerPath");
+            String genRunnPath = projectPath + res.get("generatedRunnerPath");
             Ingredients.setTrFullGenPath(genRunnPath);
 
             Map<String, String> cusPlaceHolders = (Map<String, String>) res.get("customPlaceHolders");

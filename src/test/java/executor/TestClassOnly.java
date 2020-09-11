@@ -10,7 +10,7 @@ import cookerMavenPlugin.kitchen.Ingredients;
 import java.util.HashMap;
 
 /**
- * @author Manjunath-PC
+ * @author Manjunath Prabhakar
  * @created 11/09/2020
  * @project cooker-new-version
  */

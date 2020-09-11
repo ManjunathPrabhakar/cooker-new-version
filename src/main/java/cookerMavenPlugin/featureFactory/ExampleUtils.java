@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2020.  Manjunath Prabhakar manjunath189@gmail.com
+ */
+
 package cookerMavenPlugin.featureFactory;
 
 import cookerMavenPlugin.fileFactory.ExcelReader;
@@ -10,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author Manjunath-PC
+ * @author Manjunath Prabhakar
  * @created 24/04/2020
  * @project cooker-new-version
  */
@@ -22,7 +26,7 @@ public class ExampleUtils {
      */
 
     private Examples examples = null;
-    private StringBuilder examplesResult = new StringBuilder();
+    private final StringBuilder examplesResult = new StringBuilder();
 
     public ExampleUtils(Examples prExamples) {
         this.examples = prExamples;
@@ -134,7 +138,7 @@ public class ExampleUtils {
         }
 
 
-        return (System.getProperty("line.separator") + String.valueOf(this.examplesResult));
+        return (System.getProperty("line.separator") + this.examplesResult);
     }
 
     public List<String> getExamplesTagsList() {

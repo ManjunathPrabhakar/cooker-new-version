@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2020.  Manjunath Prabhakar manjunath189@gmail.com
+ */
+
 package cookerMavenPlugin.fileGenFactory;
 
 import cookerMavenPlugin.fileFactory.FileUtils;
@@ -13,7 +17,7 @@ public class TestRunnerGenerator {
 
     ////////////////////////////////////////////////////////////////////////////////
     //Get all Values from Ingredients Class
-    private static String TestRunnerTemplateFullPath = Ingredients.getTrFullTempPath();
+    private static final String TestRunnerTemplateFullPath = Ingredients.getTrFullTempPath();
     ////////////////////////////////////////////////////////////////////////////////
 
     //Test Runner Extension
@@ -29,7 +33,7 @@ public class TestRunnerGenerator {
 
     /**
      * Static method that take all contents for Test Runner file and uses .template and replaces and crates a new TestRunner .java
-     * <h5> Author : Manjunath Prabhakar (manjunath189@gmail.com) </h5>
+     * <h5> Author : Manjunath Prabhakar </h5>
      *
      * @param pPlaceHolders     Place Holder
      * @param customPlaceHolder Custom Placeholder

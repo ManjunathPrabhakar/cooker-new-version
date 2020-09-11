@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2020.  Manjunath Prabhakar manjunath189@gmail.com
+ */
+
 package cookerMavenPlugin.featureFactory;
 
 import io.cucumber.messages.Messages.GherkinDocument.Feature.Background;
@@ -8,7 +12,7 @@ import io.cucumber.messages.Messages.GherkinDocument.Feature.Scenario;
 import java.util.List;
 
 /**
- * @author Manjunath-PC
+ * @author Manjunath Prabhakar
  * @created 24/04/2020
  * @project cooker-new-version
  */
@@ -21,7 +25,7 @@ public class RuleUtils {
      */
 
     private Rule rule = null;
-    private StringBuilder ruleResult = new StringBuilder();
+    private final StringBuilder ruleResult = new StringBuilder();
 
     public RuleUtils(Rule prRule) {
         this.rule = prRule;

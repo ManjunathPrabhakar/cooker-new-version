@@ -1,15 +1,19 @@
+/*
+ * Copyright (c) 2020.  Manjunath Prabhakar manjunath189@gmail.com
+ */
+
 package cookerMavenPlugin.featureFactory;
 
 import io.cucumber.messages.Messages.GherkinDocument.Feature.Tag;
 
 /**
- * @author Manjunath-PC
+ * @author Manjunath Prabhakar
  * @created 24/04/2020
  * @project cooker-new-version
  */
 public class TagUtils {
     private Tag tag = null;
-    private StringBuilder tagResult = new StringBuilder();
+    private final StringBuilder tagResult = new StringBuilder();
 
     public TagUtils(Tag prTag) {
         this.tag = prTag;

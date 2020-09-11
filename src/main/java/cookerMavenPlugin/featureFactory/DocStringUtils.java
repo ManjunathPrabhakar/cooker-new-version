@@ -1,9 +1,13 @@
+/*
+ * Copyright (c) 2020.  Manjunath Prabhakar manjunath189@gmail.com
+ */
+
 package cookerMavenPlugin.featureFactory;
 
 import io.cucumber.messages.Messages.GherkinDocument.Feature.Step.DocString;
 
 /**
- * @author Manjunath-PC
+ * @author Manjunath Prabhakar
  * @created 24/04/2020
  * @project cooker-new-version
  */
@@ -14,7 +18,7 @@ public class DocStringUtils {
      */
 
     private DocString docString = null;
-    private StringBuilder docStringResult = new StringBuilder();
+    private final StringBuilder docStringResult = new StringBuilder();
 
     public DocStringUtils(DocString prdocString) {
         this.docString = prdocString;
