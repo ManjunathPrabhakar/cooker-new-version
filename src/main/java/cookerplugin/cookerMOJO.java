@@ -37,7 +37,7 @@ public class cookerMOJO extends AbstractMojo {
     @Parameter(property = "customPlaceHolder", defaultValue = "")
     private Map<String, String> customPlaceHolders;
 
-    private Log LOGGER = getLog();
+    private Log MOJO_LOGGER = getLog();
 
     /**
      * This Method is First Executed during INITILIZE (cook) LifeCycle of Maven, Its Thread Safe
@@ -50,11 +50,11 @@ public class cookerMOJO extends AbstractMojo {
         // The logic of our plugin will go here
         try {
 
-            MojoLogger.setLogger(LOGGER);
+            MojoLogger.setLogger(MOJO_LOGGER);
 
-            LOGGER.info("================ COOKER CUCUMBER MAVEN PLUGIN STARTED ==========================");
-            LOGGER.info("========================== By Manjunath Prabhakar ==============================");
-            LOGGER.info("========================= ++++ cooking started ++++ ============================");
+            MOJO_LOGGER.info("================ COOKER CUCUMBER MAVEN PLUGIN STARTED ==========================");
+            MOJO_LOGGER.info("========================== By Manjunath Prabhakar ==============================");
+            MOJO_LOGGER.info("========================= ++++ cooking started ++++ ============================");
 
             //Get Ingredients
             getAndMapParameters();
@@ -63,20 +63,20 @@ public class cookerMOJO extends AbstractMojo {
             showParameters();
 
             //Start Cooking
-            LOGGER.info("======================== ++++ cooking started ++++ =============================");
+            MOJO_LOGGER.info("======================== ++++ cooking started ++++ =============================");
 //            CookerTrigger cookIt = new CookerTrigger();
 //            cookIt.cookFiles();
             CookerTrigger.cookFiles();
-            LOGGER.info("======================== ++++ cooking complete ++++ ============================");
+            MOJO_LOGGER.info("======================== ++++ cooking complete ++++ ============================");
 
         } catch (Exception e) {
 
-            LOGGER.error("===================== ++++ oh no! cooking aborted ++++ =========================");
+            MOJO_LOGGER.error("===================== ++++ oh no! cooking aborted ++++ =========================");
             e.printStackTrace();
-            LOGGER.error("================================================================================");
+            MOJO_LOGGER.error("================================================================================");
 
         } finally {
-            LOGGER.info("==================== COOKER CUCUMBER MAVEN PLUGIN ENDED ========================");
+            MOJO_LOGGER.info("==================== COOKER CUCUMBER MAVEN PLUGIN ENDED ========================");
         }
     }
 
@@ -86,7 +86,7 @@ public class cookerMOJO extends AbstractMojo {
      */
     private void getAndMapParameters() {
         try {
-            LOGGER.info("============================== Preparing Ingredients ===========================");
+            MOJO_LOGGER.info("============================== Preparing Ingredients ===========================");
             Ingredients.setUserTag(this.tag);
             Ingredients.setTrFullTempPath(this.templatePath);
             Ingredients.setfExiFullPath(this.featuresPath);
@@ -105,15 +105,15 @@ public class cookerMOJO extends AbstractMojo {
      */
     private void showParameters() {
         try {
-            LOGGER.info("============================ Selected Ingredients ==============================");
-            LOGGER.info("== Selected Tags                     : " + Ingredients.getUserTag());
-            LOGGER.info("== Test Runner Template              : " + Ingredients.getTrFullTempPath());
-            LOGGER.info("== Feature Files Directory           : " + Ingredients.getfExiFullPath());
-            LOGGER.info("== Step Definations Package          : " + Ingredients.getStepDefPackage());
-            LOGGER.info("== Feature Files Generated Directory : " + Ingredients.getFgFullGenPath());
-            LOGGER.info("== Test Runners Generated Directory  : " + Ingredients.getTrFullGenPath());
-            LOGGER.info("== Custom Placeholders               : " + Ingredients.getCustomPlaceHolders());
-            LOGGER.info("================================================================================");
+            MOJO_LOGGER.info("============================ Selected Ingredients ==============================");
+            MOJO_LOGGER.info("== Selected Tags                     : " + Ingredients.getUserTag());
+            MOJO_LOGGER.info("== Test Runner Template              : " + Ingredients.getTrFullTempPath());
+            MOJO_LOGGER.info("== Feature Files Directory           : " + Ingredients.getfExiFullPath());
+            MOJO_LOGGER.info("== Step Definations Package          : " + Ingredients.getStepDefPackage());
+            MOJO_LOGGER.info("== Feature Files Generated Directory : " + Ingredients.getFgFullGenPath());
+            MOJO_LOGGER.info("== Test Runners Generated Directory  : " + Ingredients.getTrFullGenPath());
+            MOJO_LOGGER.info("== Custom Placeholders               : " + Ingredients.getCustomPlaceHolders());
+            MOJO_LOGGER.info("================================================================================");
         } catch (Exception e) {
             e.printStackTrace();
         }
