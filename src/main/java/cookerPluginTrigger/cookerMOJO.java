@@ -24,6 +24,15 @@ public class cookerMOJO extends AbstractMojo {
     @Parameter(property = "tags", required = true, defaultValue = "")
     private String tags;
 
+    @Parameter(property = "withinScenarios", defaultValue = "")
+    private String withinScenarios;
+
+    @Parameter(property = "withinFeatures", defaultValue = "")
+    private String withinFeatures;
+
+    @Parameter(property = "noOfRunners", defaultValue = "0")
+    private String noOfRunners;
+
     @Parameter(property = "templatePath", required = true, defaultValue = "")
     private String templatePath;
 
@@ -92,6 +101,16 @@ public class cookerMOJO extends AbstractMojo {
     private void getAndMapParameters() {
         try {
             MOJO_LOGGER.info("============================== Preparing Ingredients ===========================");
+            Ingredients.setUserTag(this.tags);
+            Ingredients.setNoOfRunners(Integer.parseInt(this.noOfRunners));
+            Ingredients.setWithinScenarios(this.withinScenarios);
+            Ingredients.setWithinFeatures(this.withinFeatures);
+            Ingredients.setTrFullTempPath(this.templatePath);
+            Ingredients.setfExiFullPath(this.featuresPath);
+            Ingredients.setStepDefPackage(this.stepDefPackage);
+            Ingredients.setFgFullGenPath(this.featureFilesGenDir);
+            Ingredients.setTrFullGenPath(this.testRunnersGenDir);
+            Ingredients.setCustomPlaceHolders(this.customPlaceHolders);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -105,6 +124,15 @@ public class cookerMOJO extends AbstractMojo {
         try {
             MOJO_LOGGER.info("============================ Selected Ingredients ==============================");
             MOJO_LOGGER.info("== Selected Tags                     : " + Ingredients.getUserTag());
+            if (Ingredients.getNoOfRunners() == 0) {
+                MOJO_LOGGER.info("== No of Runners to Create           : " + Ingredients.getNoOfRunners());
+            }
+            if (Ingredients.getWithinScenarios() != null) {
+                MOJO_LOGGER.info("== Search With Scenarios             : " + Ingredients.getWithinScenarios());
+            }
+            if (Ingredients.getWithinFeatures() != null) {
+                MOJO_LOGGER.info("== Search With Features              : " + Ingredients.getWithinFeatures());
+            }
             MOJO_LOGGER.info("== Test Runner Template Path         : " + Ingredients.getTrFullTempPath());
             MOJO_LOGGER.info("== Feature Files Directory           : " + Ingredients.getfExiFullPath());
             MOJO_LOGGER.info("== Step Definitions Package          : " + Ingredients.getStepDefPackage());

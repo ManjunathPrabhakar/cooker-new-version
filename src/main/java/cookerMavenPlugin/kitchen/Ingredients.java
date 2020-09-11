@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2020.  Manjunath Prabhakar manjunath189@gmail.com
+ */
+
 package cookerMavenPlugin.kitchen;
 
 import java.util.*;
@@ -5,11 +9,21 @@ import java.util.*;
 public class Ingredients {
 
 
-    private static Map<String, String> custommap = new HashMap<String, String>();
+    private static final Map<String, String> custommap = new HashMap<String, String>();
 
     /* WHICH TAG SHOULD BE USED TO GENERATE TEST RUNNERS AND FEATURE FILES */
     //NEEDED TAG
     private static String USER_TAG;
+
+
+    /* NO OF RUNNERS TO BE CREATED */
+    private static int NO_OF_RUNNERS;
+
+    /* SEARCH TAGS WITHIN MENTIONED SCENARIOS */
+    private static String WITHIN_SCENARIOS;
+
+    /* SEARCH TAGS WITHIN MENTIONED FEATURES */
+    private static String WITHIN_FEATURES;
 
     /* WHERE IS PROJECT STORED */
     //PROJECT HOME
@@ -142,4 +156,30 @@ public class Ingredients {
     public static Map<String, String> getCustomPlaceHolders() {
         return custommap;
     }
+
+    ///////////////////////////////////////////////////////////////////////////////////////////
+    public static int getNoOfRunners() {
+        return NO_OF_RUNNERS;
+    }
+
+    public static void setNoOfRunners(int noOfRunners) {
+        NO_OF_RUNNERS = noOfRunners;
+    }
+
+    public static String getWithinScenarios() {
+        return WITHIN_SCENARIOS;
+    }
+
+    public static void setWithinScenarios(String withinScenarios) {
+        WITHIN_SCENARIOS = withinScenarios;
+    }
+
+    public static String getWithinFeatures() {
+        return WITHIN_FEATURES;
+    }
+
+    public static void setWithinFeatures(String withinFeatures) {
+        WITHIN_FEATURES = withinFeatures;
+    }
+    ////////////////////////////////////////////////////////////////////////////////////////////
 }
