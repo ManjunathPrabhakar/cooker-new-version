@@ -1,0 +1,12 @@
+cookerMavenPlugin
+cookerMavenPlugin.annotations
+cookerMavenPlugin.compiler
+cookerMavenPlugin.exceptionFactory
+cookerMavenPlugin.exceptionFactory.filesystem
+cookerMavenPlugin.exceptionFactory.properties
+cookerMavenPlugin.featureFactory
+cookerMavenPlugin.fileFactory
+cookerMavenPlugin.fileGenFactory
+cookerMavenPlugin.kitchen
+cookerMavenPlugin.loggers
+cookerPluginTrigger

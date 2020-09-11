@@ -124,7 +124,7 @@ public class cookerMOJO extends AbstractMojo {
         try {
             MOJO_LOGGER.info("============================ Selected Ingredients ==============================");
             MOJO_LOGGER.info("== Selected Tags                     : " + Ingredients.getUserTag());
-            if (Ingredients.getNoOfRunners() == 0) {
+            if (Ingredients.getNoOfRunners() > 0) {
                 MOJO_LOGGER.info("== No of Runners to Create           : " + Ingredients.getNoOfRunners());
             }
             if (Ingredients.getWithinScenarios() != null) {
