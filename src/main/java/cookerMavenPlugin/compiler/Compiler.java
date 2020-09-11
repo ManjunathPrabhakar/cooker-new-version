@@ -37,11 +37,13 @@ public class Compiler {
 
     private final IdGenerator idGenerator;
 
-    private List<String> userTags = new ArrayList<>();
+    private String userTags = new String();
     // private List<String> toCreateFiles = new ArrayList<>();
     private Multimap<String, String> multimapToCreateFiles = ArrayListMultimap.create();
 
-    public Compiler(IdGenerator idGenerator, List<String> userTags) {
+    CookerTagExpressionParser cookerTagExpressionParser;
+
+    public Compiler(IdGenerator idGenerator, String userTags) {
         this.idGenerator = idGenerator;
         this.userTags = userTags;
     }
@@ -66,7 +68,8 @@ public class Compiler {
         featureUtils = new FeatureUtils(feature);
 
         //If Feature Level Tags COntains the UserTags, then add the feature file data to the List of files to generate
-        if (featureUtils.getFeatureTagsList().containsAll(userTags)) {
+
+        if (cookerTagExpressionParser.tagParser(userTags,featureUtils.getFeatureTagsList())) {
             String featureData = featureUtils.getFeatureData();
             multimapToCreateFiles.put(featureUtils.getFeatureName(), featureData);
             return multimapToCreateFiles;
@@ -175,7 +178,7 @@ public class Compiler {
         StringBuilder sceanrioToFile = new StringBuilder();
 
         //Check if Scenario Level Tags has the User Tags
-        if (scenarioUtils.getScenarioTagsList().containsAll(userTags)) {
+        if (cookerTagExpressionParser.tagParser(userTags,scenarioUtils.getScenarioTagsList())) {
 
             //Append FeatureTags & Feature Header to StringBuilder Object
             sceanrioToFile.append(globalFeatureTags == null ? "" : globalFeatureTags);
@@ -235,7 +238,7 @@ public class Compiler {
         ExampleUtils exampleUtils = new ExampleUtils(scenarioExamples);
 
         //Check if Examples Level Tags has the Tags Specified by the User
-        if (exampleUtils.getExamplesTagsList().containsAll(userTags)) {
+        if (cookerTagExpressionParser.tagParser(userTags,exampleUtils.getExamplesTagsList())) {
 
             //Markk the Flag to TRUE
             found = true;

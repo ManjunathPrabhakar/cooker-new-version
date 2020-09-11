@@ -57,6 +57,7 @@
 
         <!-- DEPENDENCIES VERSIONS' -->
         <apache.excel.poi>4.1.2</apache.excel.poi>
+        <cucumber.tag.expr>3.0.0</cucumber.tag.expr>
         <io.cucumber.gherkin>15.0.2</io.cucumber.gherkin>
         <io.cucumber.java>6.6.1</io.cucumber.java>
         <io.cucumber.testng>6.6.1</io.cucumber.testng>
@@ -154,6 +155,11 @@
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-ooxml</artifactId>
             <version>4.1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>tag-expressions</artifactId>
+            <version>${cucumber.tag.expr}</version>
         </dependency>
         <dependency>
             <groupId>io.cucumber</groupId>

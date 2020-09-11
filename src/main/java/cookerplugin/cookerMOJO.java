@@ -16,8 +16,8 @@ import java.util.Map;
 @Mojo(name = "cook", threadSafe = true, defaultPhase = LifecyclePhase.INITIALIZE)
 public class cookerMOJO extends AbstractMojo {
 
-    @Parameter(property = "tag", required = true, defaultValue = "")
-    private String tag;
+    @Parameter(property = "tags", required = true, defaultValue = "")
+    private String tags;
 
     @Parameter(property = "templatePath", required = true, defaultValue = "")
     private String templatePath;
@@ -87,7 +87,7 @@ public class cookerMOJO extends AbstractMojo {
     private void getAndMapParameters() {
         try {
             MOJO_LOGGER.info("============================== Preparing Ingredients ===========================");
-            Ingredients.setUserTag(this.tag);
+            Ingredients.setUserTag(this.tags);
             Ingredients.setTrFullTempPath(this.templatePath);
             Ingredients.setfExiFullPath(this.featuresPath);
             Ingredients.setStepDefPackage(this.stepDefPackage);

@@ -14,7 +14,10 @@ import io.cucumber.messages.Messages.GherkinDocument;
 import io.cucumber.messages.Messages.GherkinDocument.Builder;
 
 import java.io.File;
-import java.util.*;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * This Class is the Trigger Point to parse feature files and filter as per user tags
@@ -39,11 +42,11 @@ public class CookerTrigger {
     //static List<String> filesToGenerate = new ArrayList<>();
     static Multimap<String, String> multimapFilesToGenerate = ArrayListMultimap.create();
 
-    static List<String> tagsToCreate = new ArrayList<>();
+    static String tagsToCreate = new String();
 
     public static void cookFiles() throws Exception {
 
-        tagsToCreate.add(Ingredients.getUserTag());
+        tagsToCreate = (Ingredients.getUserTag());
 
         //Initilize FileUtils Class with exiting feature files directory
         FileUtils featurecontent = new FileUtils(Ingredients.getfExiFullPath());

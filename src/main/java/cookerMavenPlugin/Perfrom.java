@@ -1,10 +1,6 @@
 package cookerMavenPlugin;
 
 import cookerMavenPlugin.annotations.initCucumber;
-import cookerMavenPlugin.fileFactory.FileUtils;
-
-import java.io.File;
-import java.util.Map;
 
 /**
  * @author Manjunath-PC

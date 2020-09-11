@@ -34,13 +34,15 @@ public class RuleCompiler {
 
     // ------- INITILIZED IN CONSTRUCTOR
     private String featureName = null;
-    private List<String> featureUserTags = null;
+    private String featureUserTags = null;
     private String featureTags = null;
     private String featureHeader = null;
     private String featurebackground = null;
     private Rule ruleFromFeature = null;
 
-    public RuleCompiler(List<String> userTags,
+    private CookerTagExpressionParser cookerTagExpressionParser;
+
+    public RuleCompiler(String userTags,
                         String featureName, String globalFeatureTags,
                         String globalFeatureHeaderData,
                         String featureBackground,
@@ -116,7 +118,8 @@ public class RuleCompiler {
         StringBuilder ruleScenarioToFile = new StringBuilder();
 
         //Check if Scenario has the Tags Specified by the User
-        if (scenarioUtils.getScenarioTagsList().containsAll(featureUserTags)) {
+
+        if (cookerTagExpressionParser.tagParser(featureUserTags,scenarioUtils.getScenarioTagsList())) {
 
             ruleScenarioToFile.append(featureTags == null ? "" : featureTags);
             ruleScenarioToFile.append(System.getProperty("line.separator"));
@@ -195,7 +198,7 @@ public class RuleCompiler {
         ExampleUtils exampleUtils = new ExampleUtils(scenarioExamples);
 
         //Check if Examples Level Tags has the Tags Specified by the User
-        if (exampleUtils.getExamplesTagsList().containsAll(featureUserTags)) {
+        if (cookerTagExpressionParser.tagParser(featureUserTags,exampleUtils.getExamplesTagsList())) {
 
             //Markk the Flag to TRUE
             found = true;
