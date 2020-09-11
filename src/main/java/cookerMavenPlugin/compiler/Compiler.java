@@ -13,7 +13,6 @@ import io.cucumber.messages.Messages.GherkinDocument.Feature.FeatureChild.Rule;
 import io.cucumber.messages.Messages.GherkinDocument.Feature.Scenario;
 import io.cucumber.messages.Messages.GherkinDocument.Feature.Scenario.Examples;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -41,11 +40,12 @@ public class Compiler {
     // private List<String> toCreateFiles = new ArrayList<>();
     private Multimap<String, String> multimapToCreateFiles = ArrayListMultimap.create();
 
-    CookerTagExpressionParser cookerTagExpressionParser;
+    private CookerTagExpressionParser cookerTagExpressionParser;
 
     public Compiler(IdGenerator idGenerator, String userTags) {
         this.idGenerator = idGenerator;
         this.userTags = userTags;
+        this.cookerTagExpressionParser = new CookerTagExpressionParser();
     }
 
     /**

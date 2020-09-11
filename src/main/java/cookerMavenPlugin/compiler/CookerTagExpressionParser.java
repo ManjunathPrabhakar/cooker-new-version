@@ -16,6 +16,10 @@ import java.util.List;
  */
 public class CookerTagExpressionParser {
 
+    public CookerTagExpressionParser() {
+
+    }
+
     public boolean tagParser(String userTags, List<String> scenarioOrFeatureTags) {
 
         Expression expression = TagExpressionParser.parse(userTags);

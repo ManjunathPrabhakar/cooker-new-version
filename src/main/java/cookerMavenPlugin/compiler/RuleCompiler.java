@@ -54,6 +54,7 @@ public class RuleCompiler {
         this.featurebackground = featureBackground;
         this.ruleFromFeature = featureRule;
         this.ruleHeaderData = new RuleUtils(this.ruleFromFeature).getRuleHeader();
+        this.cookerTagExpressionParser = new CookerTagExpressionParser();
     }
 
     /**
