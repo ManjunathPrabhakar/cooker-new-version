@@ -1,6 +1,4 @@
 *.iml
 .idea/
-!*/target
-!*/target/apidocs/*
 */target
 */generated
