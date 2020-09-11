@@ -6,7 +6,7 @@
 
     <groupId>com.github.manjunathprabhakar</groupId>
     <artifactId>cooker-new-version</artifactId>
-    <version>1.5-SNAPSHOT</version>
+    <version>1.5.1-SNAPSHOT</version>
 
     <packaging>maven-plugin</packaging>
     <!--    <packaging>jar</packaging>-->
@@ -34,13 +34,13 @@
         </license>
     </licenses>
 
-    <!--    <distributionManagement>-->
-    <!--        <repository>-->
-    <!--            <id>github</id>-->
-    <!--            <name>GitHub ManjunathPrabhakar Apache Maven Packages</name>-->
-    <!--            <url>https://maven.pkg.github.com/ManjunathPrabhakar/cooker-new-version</url>-->
-    <!--        </repository>-->
-    <!--    </distributionManagement>-->
+        <distributionManagement>
+            <repository>
+                <id>github</id>
+                <name>GitHub ManjunathPrabhakar Apache Maven Packages</name>
+                <url>https://maven.pkg.github.com/ManjunathPrabhakar/cooker-new-version</url>
+            </repository>
+        </distributionManagement>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
