@@ -3,14 +3,12 @@
   ~ Copyright (c) 2020.  Manjunath Prabhakar manjunath189@gmail.com
   -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.github.manjunathprabhakar</groupId>
     <artifactId>cooker-new-version</artifactId>
-    <version>1.5.2-SNAPSHOT</version>
+    <version>1.5.2</version>
 
     <packaging>maven-plugin</packaging>
     <!--    <packaging>jar</packaging>-->
@@ -43,7 +41,7 @@
         <developerConnection>scm:git:https://github.com/ManjunathPrabhakar/cooker-new-version.git
         </developerConnection>
         <url>https://github.com/ManjunathPrabhakar/cooker-new-version</url>
-        <tag>cooker-new-version</tag>
+        <tag>cooker-new-version-1.5.2</tag>
     </scm>
 
     <distributionManagement>
