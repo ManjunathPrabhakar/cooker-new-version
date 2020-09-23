@@ -68,8 +68,6 @@ public class cookerMOJO extends AbstractMojo {
 
             MOJO_LOGGER.info("================ COOKER CUCUMBER MAVEN PLUGIN STARTED ==========================");
             MOJO_LOGGER.info("========================== By Manjunath Prabhakar ==============================");
-            MOJO_LOGGER.info("========================= ++++ cooking started ++++ ============================");
-
             //Get Ingredients
             getAndMapParameters();
 
@@ -78,8 +76,6 @@ public class cookerMOJO extends AbstractMojo {
 
             //Start Cooking
             MOJO_LOGGER.info("======================== ++++ cooking started ++++ =============================");
-//            CookerTrigger cookIt = new CookerTrigger();
-//            cookIt.cookFiles();
             CookerTrigger.cookFiles();
             MOJO_LOGGER.info("======================== ++++ cooking complete ++++ ============================");
 

@@ -79,24 +79,4 @@ public class ExcelReader {
         return exampleFromExcel.toString();
 
     }
-
-//    //Main function is calling readExcel function to read data from excel file
-//
-//    public static void main(String... strings) throws IOException {
-//
-//        //Create an object of ReadGuru99ExcelFile class
-//
-//        ExcelReader objExcelFile = new ExcelReader();
-//
-//        //Prepare the path of excel file
-//
-//        String filePath = System.getProperty("user.dir");
-//
-//        //Call read file method of the class to read data
-//
-//        String z = objExcelFile.readExcel(filePath, "book.xlsx", "Sheet1");
-//        System.out.println(z);
-//
-//    }
-
 }

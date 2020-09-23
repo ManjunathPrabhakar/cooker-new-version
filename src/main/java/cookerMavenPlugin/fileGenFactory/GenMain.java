@@ -57,7 +57,7 @@ public class GenMain {
         //Create a Full Feature File Path
         String fullFeaturePath = GenFeatureFilesFullPath + featureFileName + ".feature";
 
-        //Initlize deafult placeholders for Test Runners
+        //Initilize default placeholders for Test Runners
         //Required : featureFilePath, StepDefs Package,
         Map<String, String> defaultPlaceholder = new HashMap<String, String>();
         defaultPlaceholder.put("featurefilepath", fullFeaturePath);

@@ -4,8 +4,10 @@
 
 package cookerMavenPlugin.kitchen;
 
+import javax.inject.Singleton;
 import java.util.*;
 
+@Singleton
 public class Ingredients {
 
 

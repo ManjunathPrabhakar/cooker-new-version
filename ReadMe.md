@@ -1,5 +1,13 @@
 ## Cucumber Cooker Plugin
 
+Refer Change Log to [here](CHANGE_LOG.md).
+
+Developed in Supported Gherkin(io.cucumber.gherkin)
+From v9.0.0
+
+Developed in Supported Cucumber Java(io.cucumber.cucumber-java)
+From v9.0.0
+
 **CURRENTLY THIS PLUGIN IS NOT AVAILABLE IN MAVEN CENTRAL**
 Please clone , and run `MVN INSTALL` to install in your machine
 
@@ -115,3 +123,33 @@ Example :
             System.out.println("Testing.afterSuite");  
         }  
     }
+
+##**EXCEL DATA USAGE IN YOUR PROJECT (Refer Below Usage)**
+
+Supports Excel XLSX & XLS format only
+
+    @E2E2
+    Scenario Outline: Test Scenario New One
+      Given Some Given
+      When Some When "<param>"
+      Then Some Then
+      And Some And
+      
+      @excel=root=book.xlsx=Sheet1
+      Examples:
+        | param |
+        | data  |
+
+
+the @excel tag is written above Examples. so that example will be replaced with data from Excel
+FORMAT : @excel=<FOLDER_PATH>=<EXCELFILENAME>.<EXTENSION>=<SHEETNAME>
+ example:
+  1. `@excel=root=book.xlsx=Sheet1`
+    - since FOLDER_PATH here is "root" -> project root directory is considered
+    - book.xlsx - is the FIle name with its extension
+    - Sheet1 - sheet name within the Excel sheet
+  2. `@excel=C:\Users\Manjunath-PC\Documents=book.xlsx=Sheet1`
+    - since FOLDER_PATH here is "C:\Users\Manjunath-PC\Documents" -> given path is considered
+  
+ Once the plugin is executed, the Example data is replaced with data from Excel
+ 

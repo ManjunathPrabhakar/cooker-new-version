@@ -38,13 +38,21 @@
         </license>
     </licenses>
 
-    <!--    <distributionManagement>-->
-    <!--        <repository>-->
-    <!--            <id>github</id>-->
-    <!--            <name>GitHub ManjunathPrabhakar Apache Maven Packages</name>-->
-    <!--            <url>https://maven.pkg.github.com/ManjunathPrabhakar/cooker-new-version</url>-->
-    <!--        </repository>-->
-    <!--    </distributionManagement>-->
+    <scm>
+        <connection>scm:git:git://github.com/ManjunathPrabhakar/cooker-new-version.git</connection>
+        <developerConnection>scm:git:https://github.com/ManjunathPrabhakar/cooker-new-version.git
+        </developerConnection>
+        <url>https://github.com/ManjunathPrabhakar/cooker-new-version</url>
+        <tag>cooker-new-version</tag>
+    </scm>
+
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub ManjunathPrabhakar Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/ManjunathPrabhakar/cooker-new-version</url>
+        </repository>
+    </distributionManagement>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -59,7 +67,7 @@
         <apache.maven.javadoc.plugin>3.2.0</apache.maven.javadoc.plugin>
         <apache.maven.release.plugin>2.5.3</apache.maven.release.plugin>
 
-        <!-- DEPENDENCIES VERSIONS' -->
+        <!-- DEPENDENCIES VERSIONS' 15.0.2-->
         <apache.excel.poi>4.1.2</apache.excel.poi>
         <cucumber.tag.expr>3.0.0</cucumber.tag.expr>
         <io.cucumber.gherkin>15.0.2</io.cucumber.gherkin>

@@ -5,6 +5,7 @@
 package cookerMavenPlugin.featureFactory;
 
 import cookerMavenPlugin.fileFactory.ExcelReader;
+import cookerMavenPlugin.loggers.MojoLogger;
 import io.cucumber.messages.Messages.GherkinDocument.Feature.Scenario.Examples;
 import io.cucumber.messages.Messages.GherkinDocument.Feature.TableRow;
 import io.cucumber.messages.Messages.GherkinDocument.Feature.TableRow.TableCell;
@@ -60,7 +61,8 @@ public class ExampleUtils {
             boolean needExcel = false;
             boolean needExamples = true;
             for (Tag exTag : examplesTagsList) {
-                if (exTag.getName().contains("@excel")) {
+                String tagName = exTag.getName();
+                if ((tagName.toLowerCase()).contains("@excel")) {
                     try {
                         path.add(exTag.getName().split("=")[1]); //Path
                         path.add(exTag.getName().split("=")[2]); //filename
@@ -70,9 +72,9 @@ public class ExampleUtils {
                         break;
                     } catch (Exception e) {
                         //If error in extracting then log warning message and set res = false
-//                        MojoLogger.getLogger().error("Issue in prasing Excel for Scenario Outline " + sSoName +
-//                                "\nExcel Tag format must be @excel=folderpath=filename.fileextension=sheetname\n" +
-//                                "if folderpath is root then project path is taken");
+                        MojoLogger.getLogger().warn("Issue in parsing Excel for Examples " + examplesName +
+                                "\nExcel Tag format must be @excel=folderpath=filename.fileextension=sheetname\n" +
+                                "if folderpath is root then project path is taken");
                         needExcel = false;
                         needExamples = true;
                         break;
@@ -85,23 +87,21 @@ public class ExampleUtils {
                 try {
 
                     //Prepare the path of excel file
-                    String filePath = null;
-                    if (path.get(0).equalsIgnoreCase("root")) {
-                        filePath = System.getProperty("user.dir");
-                    } else {
+                    String filePath = System.getProperty("user.dir");
+                    if (!(path.get(0).equalsIgnoreCase("root"))) {
                         filePath = path.get(0);
                     }
 
                     //Call read file method of the class to read data
-                    String z = ExcelReader.readExcel(filePath, path.get(1), path.get(2));
-                    excelExamples.append(z);
+                    String examplesFromExcel = ExcelReader.readExcel(filePath, path.get(1), path.get(2));
+                    excelExamples.append(examplesFromExcel);
 
                     this.examplesResult.append(excelExamples);
                 } catch (Exception e) {
                     //If error in extracting then log warning message and set res = false
-//                    MojoLogger.getLogger().error("Issue in prasing Excel for Scenario Outline " + sSoName +
-//                            "\nExcel Tag format must be @excel=folderpath=filename.fileextension=sheetname\n" +
-//                            "if folderpath is root then project path is taken");
+                    MojoLogger.getLogger().warn("Issue in parsing Excel for Examples " + examplesName +
+                            "\nExcel Tag format must be @excel=folderpath=filename.fileextension=sheetname\n" +
+                            "if folderpath is root then project path is taken");
                     needExamples = true;
                 }
             }

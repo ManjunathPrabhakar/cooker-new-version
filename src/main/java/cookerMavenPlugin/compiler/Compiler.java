@@ -40,10 +40,9 @@ public class Compiler {
 
     private final IdGenerator idGenerator;
 
-    // private List<String> toCreateFiles = new ArrayList<>();
     private final Multimap<String, String> multimapToCreateFiles = ArrayListMultimap.create();
     private final CookerTagExpressionParser cookerTagExpressionParser;
-    private String userTags = "";
+    private final String userTags;
 
     public Compiler(IdGenerator idGenerator, String userTags) {
         this.idGenerator = idGenerator;
@@ -167,9 +166,9 @@ public class Compiler {
 
     /**
      * This Method is used to Compile Scenario Object from the Feature File
-     * If the Scenario/Sceanrio Outline Level Tags has the same Tags specified by user then load the whole scenario/Sceanrio Outline to create a file
-     * Else Get the List of Examples of from the Sceanrio Outline,
-     * for each Examples of the Sceanrio Outline call compileScenarioWithExample with Scenario Object & Examples Object
+     * If the Scenario/Scenario Outline Level Tags has the same Tags specified by user then load the whole scenario/Scenario Outline to create a file
+     * Else Get the List of Examples of from the Scenario Outline,
+     * for each Examples of the Scenario Outline call compileScenarioWithExample with Scenario Object & Examples Object
      * <h5> Author : Manjunath Prabhakar </h5>
      *
      * @param featureScenario Scenario Object from Feature
@@ -189,7 +188,7 @@ public class Compiler {
             sceanrioToFile.append(globalFeatureHeaderData);
             sceanrioToFile.append(System.getProperty("line.separator"));
 
-            //Get the ScenarioData from scenarioutils Object
+            //Get the ScenarioData from Scenarioutils Object
             String scenarioData = scenarioUtils.getScenarioData();
 
             //Check the feature background
@@ -208,8 +207,8 @@ public class Compiler {
             multimapToCreateFiles.put(featureUtils.getFeatureName(), sceanrioToFile.toString());
         }
         //If the Scenario Level tags doesnt have the Tags Specified by User, Then
-        //Check if Scenario has Examples to Determine if its a Sceanrio Outline/Scenario Template
-        //Coz Examples also might have Tags, If it same as userTags then Sceanrio + that matching example
+        //Check if Scenario has Examples to Determine if its a Scenario Outline/Scenario Template
+        //Coz Examples also might have Tags, If it same as userTags then Scenario + that matching example
         else {
             //Create a List of Examples Object to Store the Examples of the Current Scenario
             List<Examples> examplesList = featureScenario.getExamplesList();
@@ -278,7 +277,7 @@ public class Compiler {
                 scenarioData.append(stepData);
 
             }
-            //Get the Examples Data and Append to SceanrioData Object
+            //Get the Examples Data and Append to ScenarioData Object
             String exampleData = exampleUtils.getExamplesData();
             scenarioData.append(exampleData);
         }
@@ -287,19 +286,19 @@ public class Compiler {
         if (found) {
             //If feature has no background
             if (featureBackground == null && found) {
-                //Append FeatureTags, FeatureHeader and Sceanrio Data
+                //Append FeatureTags, FeatureHeader and Scenario Data
                 scenarioWithExampleToFile.append(globalFeatureTags == null ? "" : globalFeatureTags);
                 scenarioWithExampleToFile.append(globalFeatureHeaderData);
                 scenarioWithExampleToFile.append(scenarioData);
             } else {
-                //Append FeatureTags, FeatureHeader , Background and Sceanrio Data
+                //Append FeatureTags, FeatureHeader , Background and Scenario Data
                 scenarioWithExampleToFile.append(globalFeatureTags == null ? "" : globalFeatureTags);
                 scenarioWithExampleToFile.append(globalFeatureHeaderData);
                 scenarioWithExampleToFile.append(featureBackgroundData);
                 scenarioWithExampleToFile.append(scenarioData);
             }
 
-            //Add the sceanrioOutline to create a file
+            //Add the ScenarioOutline to create a file
             multimapToCreateFiles.put(featureUtils.getFeatureName(), scenarioWithExampleToFile.toString());
         }
     }

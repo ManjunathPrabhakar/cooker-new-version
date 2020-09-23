@@ -67,7 +67,6 @@ public class CookerTrigger {
                 //Get the Content of the Feature File to String
                 String featureFileContent = FileUtils.readAndGetFileContent(featureFile.getPath());
 
-
                 //Check if Feature File is Empty
                 if (featureFileContent.equals("")) {
                     //Display the feature file is empty and go to next Feature File
